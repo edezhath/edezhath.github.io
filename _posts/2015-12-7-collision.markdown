@@ -7,7 +7,10 @@ published: true
 
 
 ## Feature preparation
-The data includes coordinates for each collision, which will be used more easily by learning algorithms if we can group these into a few neighborhoods. I use K-means clustering to put these into a few groups. ![clusters.jpeg]({{site.baseurl}}/_posts/clusters.jpeg)
+The data includes coordinates for each collision, which will be used more easily by learning algorithms if we can group these into a few neighborhoods. I use K-means clustering to put these into a few groups. 
+
+![clusters.jpeg]({{site.baseurl}}/_posts/clusters.jpeg)
+
  
 
 
