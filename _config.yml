@@ -1,4 +1,5 @@
 # Site settings
+name: Scientia Ex Machina
 title: Scientia Ex Machina
 email: ralph.angelus@gmail.com
 baseurl: "" # the subpath of your site, e.g. /blog/
