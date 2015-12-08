@@ -13,8 +13,8 @@ I use the NYPD collision data from 2013-2014 to illlustrate some machine learnin
 ## Feature preparation
 The data includes coordinates for each collision, which will be used more easily by learning algorithms if we can group these into a few neighborhoods. I use K-means clustering to put these into a few groups. To determine the optimal number of clusters, I use the 'elbow method' : if you look at the sum of squared distances (of all point to their respective centers) the explained variance as a number of clusters, it decreases rapidly until the optimal point and thereafter the gains are marginal, as shown below.
 
-<img src="/_posts/elbow.jpeg" style="float: left; width: 50%; margin-right: 1%; margin-bottom: 0.5em;">
-<img src="/_posts/clusters.jpeg" style="float: left; width: 50%; margin-right: 1%; margin-bottom: 0.5em;">
+<img src="/_posts/elbow.jpeg" style="float: left; width: 40%; margin-right: 1%; margin-bottom: 0.5em;">
+<img src="/_posts/clusters.jpeg" style="float: left; width: 40%; margin-right: 1%; margin-bottom: 0.5em;">
 <p style="clear: both;">
 
 ![elbow.jpeg]({{site.baseurl}}/_posts/elbow.jpeg) ![clusters.jpeg]({{site.baseurl}}/_posts/clusters.jpeg)
