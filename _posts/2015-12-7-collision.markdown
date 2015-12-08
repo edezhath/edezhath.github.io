@@ -3,6 +3,7 @@ layout: post
 title: Modelling injury rates in NYPD Collision data
 categories: jekyll update
 published: true
+markdown: kramdown
 ---
 
 
