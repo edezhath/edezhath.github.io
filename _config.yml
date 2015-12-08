@@ -1,8 +1,9 @@
 # Site settings
-title: Ralph's ML Blog
+title: Scientia Ex Machina
 email: ralph.angelus@gmail.com
 baseurl: "" # the subpath of your site, e.g. /blog/
 url: "https://edezhath.github.io/" # the base hostname & protocol for your site
+description: ML for fun and edification
 
 github_username:  edezhath
 
