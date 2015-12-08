@@ -18,9 +18,7 @@ The data includes coordinates for each collision, which will be used more easily
 
 Clearly this is a bit subjective. The [gap static](https://web.stanford.edu/~hastie/Papers/gap.pdf) is unambiguous and better motivated theoretically, but I use something quick and easy for now. The final cluster centers overlayed over a scatterplot of all the injury-causing collisions:
 
- 
-
-
+![clusters.jpeg]({{site.baseurl}}/_posts/clusters.jpeg)
 
 You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run `jekyll serve --watch`, which launches a web server and auto-regenerates your site when a file is updated.
 
