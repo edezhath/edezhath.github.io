@@ -23,7 +23,17 @@ The optimal number of clusters is a bit subjective using this method, since you 
 ![clusters.jpeg]({{site.baseurl}}/_posts/clusters.jpeg)
 
 ##Encoding categorical features
-We have to encode categorical data into numerical features. We could assign a numerical value to each feature, say `[0,1,2]` for `['BRONX', 'QUEENS', 'BROOKLYN']`. But this would introduce an unintended scale into the data : Brooklyn is not actually twice Queens.  To avoid this, each category is encoded as a seperate 0-1 feature. 
+We have to encode categorical data into numerical features. We could assign a numerical value to each feature, say `[0,1,2]` for `['BRONX', 'QUEENS', 'BROOKLYN']`. But this would introduce an unintended scale into the data : Brooklyn is not actually twice Queens.  To avoid this, each category is encoded as a seperate 0-1 feature. I make a dictionary from the unique values of each feature, and use this to replace them in the Pandas dataframe. We can then run this through scikit-learn's "OneHotEncoder". It's useful to store this encoding dictionary instead of doing it on the fly, since we'll need to use the same encoding scheme for test/future data that we want to make predictions for.
+{% highlight python %}
+replacedict=dict.fromkeys(data.columns.values)
+for i in train.columns.values:
+    if(data[i].dtype=='O'):
+        uniques=data[i].unique()
+        replacedict[i]=dict(zip(uniques,range(len(uniques))))
+        data[i]=train[i].replace(replacedict[i])
+{% endhighlight %}
+
+
 
 {% highlight python %}
 dist=[]
