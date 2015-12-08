@@ -8,12 +8,13 @@ markdown: kramdown
 
 
 
+
 I use the NYPD collision data from 2013-2014 to illlustrate some machine learning techniques, and see what insights can be gained from modeling the data.
 
 ## K-means clustering
 The data includes coordinates for each collision, which will be used more easily by learning algorithms if we can group these into a few neighborhoods. I use K-means clustering to put these into a few groups. To determine the optimal number of clusters, I use the 'elbow method' : if you look at the sum of squared distances (of all point to their respective centers) the explained variance as a number of clusters, it decreases rapidly until the optimal point and thereafter the gains are marginal, as shown below.
 
-<img src="/_posts/elbow.jpeg" align="middle" style="width:70%;">
+![Number of clusters vs Inertia]({{site.baseurl}}/_posts/elbow.jpeg)
 
 Clearly this is a bit subjective. The [gap static](https://web.stanford.edu/~hastie/Papers/gap.pdf) is unambiguous and better motivated theoretically, but I use something quick and easy for now. The final cluster centers overlayed over a scatterplot of all the injury-causing collisions:
 
