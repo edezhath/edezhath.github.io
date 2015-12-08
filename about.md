@@ -2,12 +2,10 @@
 layout: page
 title: About
 permalink: /about/
+published: true
 ---
 
-I'm a particle physics Physics PhD
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](http://jekyllrb.com/)
+I'm a particle physicist in the process of becoming a machine learning practitioner. My PhD research was in high energy phenomenology, which is the meeting point of theory and collider physics - I studied new tests at colliders for dark matter and Higgs sector particles. 
 
-You can find the source code for the Jekyll new theme at: [github.com/jglovier/jekyll-new](https://github.com/jglovier/jekyll-new)
-
-You can find the source code for Jekyll at [github.com/jekyll/jekyll](https://github.com/jekyll/jekyll)
+Besides physics, math and machine learning, I enjoy shred guitar, boxing and philosophy. 
