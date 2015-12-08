@@ -9,6 +9,7 @@ markdown: kramdown
 
 
 
+
 I use the NYPD collision data from 2013-2014 to illlustrate some machine learning techniques, and see what insights can be gained from modeling the data.
 
 ## K-means clustering
@@ -23,7 +24,7 @@ The optimal number of clusters is a bit subjective using this method, since you 
 ![clusters.jpeg]({{site.baseurl}}/_posts/clusters.jpeg)
 
 ##Encoding categorical features
-We have to encode categorical data into numerical features. We could assign a numerical value to each feature, say `[0,1,2]` for `['BRONX', 'QUEENS', 'BROOKLYN']`. But this would introduce an unintended scale into the data : Brooklyn is not actually twice Queens.  To avoid this, each category is encoded as a seperate 0-1 feature. I make a dictionary from the unique values of each feature, and use this to replace them in the Pandas dataframe. We can then run this through scikit-learn's "OneHotEncoder". It's useful to store this encoding dictionary instead of doing it on the fly, since we'll need to use the same encoding scheme for test/future data that we want to make predictions for.
+We have to encode categorical data into numerical features. We could assign a numerical value to each value, say `[0,1,2]` for `['BRONX', 'QUEENS', 'BROOKLYN']`. But this would introduce an unintended scale into the data : Brooklyn is not actually twice Queens.  To avoid this, each category is encoded as a seperate 0-1 feature. I make a dictionary from the unique values of each feature, and use this to replace them in the Pandas dataframe. We can then run this through scikit-learn's "OneHotEncoder". It's useful to store this encoding dictionary instead of doing it on the fly, since we'll need to use the same encoding scheme for test/future data that we want to make predictions for.
 {% highlight python %}
 replacedict=dict.fromkeys(data.columns.values)
 for i in train.columns.values:
@@ -33,19 +34,5 @@ for i in train.columns.values:
         data[i]=train[i].replace(replacedict[i])
 {% endhighlight %}
 
-
-
-{% highlight python %}
-dist=[]
-for i in range(5,60,3):
-    kmn=KMeans(n_clusters=i, init='k-means++', n_init=5, max_iter=300, tol=0.000001, precompute_distances=True, n_jobs=3)
-    kmn=kmn.fit(locdata)
-    cent=kmn.cluster_centers_
-    dist.append([i,kmn.inertia_])
-#=> Intertia graph
-{% endhighlight %}
-
-
-[jekyll]:      http://jekyllrb.com
-[jekyll-gh]:   https://github.com/jekyll/jekyll
-[jekyll-help]: https://github.com/jekyll/jekyll-help
+##Injury classification/prediction
+I tried a few different classification algorithms to predict whether a given collision results in injury. The dataset is imbalanced - only 20% of collisions result in an injury.
