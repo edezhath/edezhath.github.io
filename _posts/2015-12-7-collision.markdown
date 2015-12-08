@@ -44,6 +44,9 @@ I tried a few different classification algorithms to predict whether a given col
 | Logistic Regression | 0.842 | 0.66 | ~5 seconds | L1: 1e-2, L2: 1e-5 |
 | Neural Network | 0.848 | 0.67 | ~10 mins | 200 hidden units, dropout |
 
+
 The GBM does only marginally better than the Logistic Regression, but at a huge premium in computational complexity. It can be speeded up a bit using randoming sub-sampling without sacrificing much in accuracy. ML algorithms generally tend to overfit, so we have to impose some regularization penalty into the loss function or early stopping criteria to avoid this. Here I use an ElasticNet penalty, meaning a combination of least squared and absolute distances for logistic regression. For the NN I tried Dropout works about as good Elasticnet while being faster. 
 
-We can look at the feature relevance scores in the trained model to understand how different factores affect injury rates. 
+We can look at the feature relevance scores in the trained model to understand how different factores affect injury rates. Although it's slightly less accurate than the GBM, we look at the feature importances using the Logistic Regression model, since the sign of the coefficient also indicates whether a particular feature increases or decreases the probability of injury. The top positive (injury-increasing) cofficients are shown below, scaled relative to the largest:
+
+
