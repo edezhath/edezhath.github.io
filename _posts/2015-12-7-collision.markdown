@@ -6,8 +6,14 @@ published: true
 ---
 
 
+I use the NYPD collision data from 2013-2014 to demonstrate some machine learning techniques, and see what insights can be gained from a predictive ML model for the data.
+
 ## Feature preparation
-The data includes coordinates for each collision, which will be used more easily by learning algorithms if we can group these into a few neighborhoods. I use K-means clustering to put these into a few groups. 
+The data includes coordinates for each collision, which will be used more easily by learning algorithms if we can group these into a few neighborhoods. I use K-means clustering to put these into a few groups. To determine the optimal number of clusters, I use the 'elbow method' : if you look at the sum of squared distances (of all point to their respective centers) the explained variance as a number of clusters, it decreases rapidly until the optimal point and thereafter the gains are marginal, as shown below.
+
+![elbow.jpeg]({{site.baseurl}}/_posts/elbow.jpeg)
+
+Clearly this is a bit subjective. The [gap static](https://web.stanford.edu/~hastie/Papers/gap.pdf) is unambiguous and better motivated theoretically, but I use something quick and easy for now. The final cluster centers overlayed over a scatterplot of all the injury-causing collisions:
 
 ![clusters.jpeg]({{site.baseurl}}/_posts/clusters.jpeg)
 
