@@ -8,3 +8,5 @@ github_username:  edezhath
 
 # Build settings
 markdown: kramdown
+
+include: [_posts]
