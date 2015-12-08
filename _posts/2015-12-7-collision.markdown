@@ -15,7 +15,7 @@ The data includes coordinates for each collision, which will be used more easily
 
 <img src="/_posts/elbow.jpeg" style="float: left; width: 50%; margin-right: 0%; margin-bottom: 0.5em;"></img>
 <img src="/_posts/clusters.jpeg" style="float: left; width: 50%; margin-right: 0%; margin-bottom: 0.5em;"></img>
-<p style="clear: both;">
+<p style="clear: both;"></p>
 
 ![elbow.jpeg]({{site.baseurl}}/_posts/elbow.jpeg) ![clusters.jpeg]({{site.baseurl}}/_posts/clusters.jpeg)
 
