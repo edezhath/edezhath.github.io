@@ -35,4 +35,13 @@ for i in train.columns.values:
 {% endhighlight %}
 
 ##Injury classification/prediction
-I tried a few different classification algorithms to predict whether a given collision results in injury. The dataset is imbalanced - only 20% of collisions result in an injury.
+I tried a few different classification algorithms to predict whether a given collision results in injury. We use AUC in addition to the accuracy to evaulate models, since for an imbalanced dataset like this one, a model can achieve very high accuracy just by predicting every point to be in the same class. Gradient boosted trees (using [xgboost](https://xgboost.readthedocs.org/en/latest/) performed the best)
+
+| Algorithm              | Accuracy | AUC  | Training time |
+|------------------------|----------|------|---------------|
+| Gradient boosted trees | 0.854    | 0.69 | ~10 mins      |
+| Random Forest          | 0.824    | 0.61 | ~5 mins       |
+| Logistic Regression    | 0.842    | 0.66 | ~5 seconds    |
+| Neural Network         | 0.848    | 0.67 | ~10 mins      |
+
+The GBM does only marginally better than the Logistic Regression, but at a huge premium in computational complexity. ML algorithms generally tend to overfit, so    we have to impose some regularization penalty into the loss function or early stopping criteria to avoid this. Here I use an ElasticNet penalty, meaning a combination of least squared and absolute distances for logistic regression. For the NN I tried both Dropout (randomly omitting some hidden units) 
