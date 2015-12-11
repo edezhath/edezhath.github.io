@@ -1,9 +1,10 @@
 ---
-published: false
+published: true
 layout: post
 categories: jekyll update
 markdown: kramdown
 ---
+
 
 
 In most machine learning problems, some number of the features are noise or unrelated to the variable we're trying to predict. Reducing these features can greatly improve the accuracy and efficiency of the learning algorithm, and in some cases it's a necessity : when computational resources are too limited to run all the available features through your algorithm. We'll look at how very shallow Random Forests can be used to quickly and easily reduce the number of features without losing useful information. We'll also compare this with PCA, which is a commonly used technique for dimensionality reduction. We'll use the RandomForest and PCA implementations from scikit-learn. The target we'll try to model will be a function of 5 "true" features : 5 columns of numbers randomly drawn from [0, 1).
