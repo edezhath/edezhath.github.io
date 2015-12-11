@@ -17,13 +17,13 @@ truefeatures=np.random.rand(1000,5)
 The regression target is generated as the following function of these random variables c0...c4:
 $$f(c_0,c_1,c_2,c_3,c_4)=(c_0+c_1)sin(c_2)-c_3 e^{ c_4}$$
 
-{% highlight python %}:
+{% highlight python %}
 target=map(lambda c:(c[0]+c[1])*np.sin(c[2])-c[3]*np.exp(c[4]),truefeatures[:,:5])
 {% endhighlight  %}
 
 Next we'll add a hundred columns of junk, unrelated to the target
 
-{% highlight python %}:
+{% highlight python %}
 train=np.append(truefeatures,np.random.rand(1000,100),axis=1)
 {% endhighlight  %}
 
