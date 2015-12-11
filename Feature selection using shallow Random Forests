@@ -31,8 +31,8 @@ We'll make a Random Forest that has 500 trees with 2 levels each and we'll only 
 forest=sklearn.ensemble.RandomForestRegressor(n_estimators=500,max_depth=2,max_features=3)
 %time forest=forest.fit(train,target)
 {% endhighlight  %}
-``CPU times: user 459 ms, sys: 0 ns, total: 459 ms
-Wall time: 460 ms``
+``CPU times: user 459 ms, sys: 0 ns, total: 459 ms``
+``Wall time: 460 ms``
 
 Very fast even on my dated i5-3230M. Now we can use the built in feature relevance score to find the ones to keep. The 5 highest ones are as expected, the true features. And they're several standard deviations above the mean score - one's even up to particle physics standards!
 
