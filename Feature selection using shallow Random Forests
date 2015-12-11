@@ -21,15 +21,19 @@ target=map(lambda c:(c[0]+c[1])*np.sin(c[2])-c[3]*np.exp(c[4]),truefeatures[:,:5
 
 Next we'll add a hundred columns of junk, unrelated to the target
 
-In [4]:
+{% highlight python %}:
 train=np.append(truefeatures,np.random.rand(1000,100),axis=1)
+{% endhighlight  %}
+
 We'll make a Random Forest that has 500 trees with 2 levels each and we'll only look at 3 features at a time. Quick intro to Random Forests: it's a collection of decision trees, each trained on a randomly drawn subset of the data and features.
 
-In [5]:
+{% highlight python %}
 forest=sklearn.ensemble.RandomForestRegressor(n_estimators=500,max_depth=2,max_features=3)
 %time forest=forest.fit(train,target)
-CPU times: user 459 ms, sys: 0 ns, total: 459 ms
-Wall time: 460 ms
+{% endhighlight  %}
+``CPU times: user 459 ms, sys: 0 ns, total: 459 ms
+Wall time: 460 ms``
+
 Very fast even on my dated i5-3230M. Now we can use the built in feature relevance score to find the ones to keep. The 5 highest ones are as expected, the true features. And they're several standard deviations above the mean score - one's even up to particle physics standards!
 
 In [7]:
