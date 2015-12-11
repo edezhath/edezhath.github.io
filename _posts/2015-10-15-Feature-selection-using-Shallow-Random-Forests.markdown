@@ -127,4 +127,3 @@ AUC is 0.998354
 The code for file trainmlp.py ran for 0.02m
 
 The reduced feature set trains 25X faster, and has a 50% improvement in the error rate! But in this case we knew how many features to keep. So how do we figure out how many to keep in a more realistic scenario? We could shuffle the labels to get a baseline score, and use this to determine which features to keep or discard. I'll look at this in more detail in the next post.
-Enter text in [Markdown](http://daringfireball.net/projects/markdown/). Use the toolbar above, or click the **?** button for formatting help.
