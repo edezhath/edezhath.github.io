@@ -47,7 +47,7 @@ Very fast even on my dated i5-3230M. Now we can use the built in feature relevan
 np.argsort(forest.feature_importances_)[-5:]
 {% endhighlight %}
 
-{% highlight vim %}
+{% highlight %}
 array([4, 3, 0, 1, 2])
 {% endhighlight %}
 
