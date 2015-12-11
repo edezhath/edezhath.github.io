@@ -1,6 +1,10 @@
 ---
 published: true
+layout: post
+categories: jekyll update
+markdown: kramdown
 ---
+
 
 
 ## Feature selection with shallow Random Forests
