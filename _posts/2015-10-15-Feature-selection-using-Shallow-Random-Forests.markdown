@@ -36,22 +36,21 @@ forest=sklearn.ensemble.RandomForestRegressor(n_estimators=500,max_depth=2,max_f
 %time forest=forest.fit(train,target)
 {% endhighlight  %}
 ``CPU times: user 459 ms, sys: 0 ns, total: 459 ms``
-Wall time: 460 ms``
+``Wall time: 460 ms``
 
 Very fast even on my dated i5-3230M. Now we can use the built in feature relevance score to find the ones to keep. The 5 highest ones are as expected, the true features. And they're several standard deviations above the mean score - one's even up to particle physics standards!
 
 {% highlight python %}
 np.argsort(forest.feature_importances_)[-5:]
 {% endhighlight %}
-Out[7]:
-array([4, 3, 0, 1, 2])
+``array([4, 3, 0, 1, 2])``
 
 
 {% highlight python %}
 (forest.feature_importances_[:5]-np.mean(forest.feature_importances_))/np.std(forest.feature_importances_)
 {% endhighlight %}
-Out[8]:
-array([ 3.52628814,  2.93327098,  3.89061919,  5.21814166,  3.33544238])
+``array([ 3.52628814,  2.93327098,  3.89061919,  5.21814166,  3.33544238])``
+
 Is this reliable? Let's do a hundred runs with just 300 trees and count what fraction of times the true features are in the top 5.
 
 {% highlight python %}
@@ -68,10 +67,7 @@ for i in range(100):
 histrf/100
 {% endhighlight %}
     
-        
-    
-Out[9]:
-array([ 0.83,  0.87,  0.96,  0.97,  0.91])
+``array([ 0.83,  0.87,  0.96,  0.97,  0.91])``
 
 The less trees you have, the less likely they are to be sampled enough to be found as good features. 2-3X the number of total features will get you the right ones most of the time, and 4-5X will pretty much guarantee they're the top ones. How does PCA do in this problem? Since all our features are completely independent, we know the principal components will consist of the junk and true features with equal probability. But just for fun, let's look at how often the true features are among the largest five factors in the first five principal components.
 
