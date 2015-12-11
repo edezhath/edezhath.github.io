@@ -5,22 +5,20 @@ categories: jekyll update
 markdown: kramdown
 ---
 
-
-
-
-## Feature selection with shallow Random Forests
-
 In most machine learning problems, some number of the features are noise or unrelated to the variable we're trying to predict. Reducing these features can greatly improve the accuracy and efficiency of the learning algorithm, and in some cases it's a necessity : when computational resources are too limited to run all the available features through your algorithm. We'll look at how very shallow Random Forests can be used to quickly and easily reduce the number of features without losing useful information. We'll also compare this with PCA, which is a commonly used technique for dimensionality reduction. We'll use the RandomForest and PCA implementations from scikit-learn. The target we'll try to model will be a function of 5 "true" features : 5 columns of numbers randomly drawn from [0, 1).
 
 {% highlight python %}
 import sklearn.ensemble, sklearn.decomposition, numpy as np
 truefeatures=np.random.rand(1000,5)
-The regression target is generated as the following function of these random variables c0...c4:
-{% endhighlight %}
+{% highlight python %}
 
-f(c0,c1,c2,c3,c4)=(c0+c1)sin(c2)−c3ec4
-In [3]:
+The regression target is generated as the following function of these random variables c0...c4:
+$$f(c_0,c_1,c_2,c_3,c_4)=(c_0+c_1)sin(c_2)-c_3 e^{ c_4}$$
+
+{% highlight python %}:
 target=map(lambda c:(c[0]+c[1])*np.sin(c[2])-c[3]*np.exp(c[4]),truefeatures[:,:5])
+{% highlight python %}
+
 Next we'll add a hundred columns of junk, unrelated to the target
 
 In [4]:
