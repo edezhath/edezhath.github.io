@@ -84,15 +84,16 @@ for i in range(100):
         histpca[j]+=1
 histpca/100
 {% endhighlight %}
-Out[10]:
-array([ 0.11,  0.04,  0.04,  0.05,  0.06])
+
+``array([ 0.11,  0.04,  0.04,  0.05,  0.06])``
+
 Quite dismal. But this isn't really fair, since we would know not to use PCA in the case : the variance explained by the top principal components is only a tiny fraction of the total variance in the data.
 
 {% highlight python %}
 pca.explained_variance_ratio_[:5]
 {% endhighlight %}
-Out[12]:
-array([ 0.01665517,  0.01635231,  0.01580367,  0.01550839,  0.01541421])
+``array([ 0.01665517,  0.01635231,  0.01580367,  0.01550839,  0.01541421])``
+
 How much does removing the junk features help with the final training algorithm? To make it easier to score the performance (so we can use area under ROC) we'll convert this into a classification problem. The mean value of the target function is f(ci=0.5)≈−0.344935, so we'll use this as our decision boundary and get an even distribution of 1's and 0's in the target column.
 
 {% highlight python %}
