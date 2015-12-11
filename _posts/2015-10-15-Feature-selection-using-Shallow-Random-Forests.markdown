@@ -9,7 +9,7 @@ markdown: kramdown
 
 In most machine learning problems, some number of the features are noise or unrelated to the variable we're trying to predict. Reducing these features can greatly improve the accuracy and efficiency of the learning algorithm, and in some cases it's a necessity : when computational resources are too limited to run all the available features through your algorithm. We'll look at how very shallow Random Forests can be used to quickly and easily reduce the number of features without losing useful information. We'll also compare this with PCA, which is a commonly used technique for dimensionality reduction. We'll use the RandomForest and PCA implementations from scikit-learn. The target we'll try to model will be a function of 5 "true" features : 5 columns of numbers randomly drawn from [0, 1).
 
-{% highlight python %}
+{% highlight numpy %}
 import sklearn.ensemble, sklearn.decomposition, numpy as np
 truefeatures=np.random.rand(1000,5)
 {% endhighlight %}
@@ -19,19 +19,19 @@ $$
 f(c_0,c_1,c_2,c_3,c_4)=(c_0+c_1)sin(c_2)-c_3 e^{ c_4}
 $$
 
-{% highlight python %}
+{% highlight numpy %}
 target=map(lambda c:(c[0]+c[1])*np.sin(c[2])-c[3]*np.exp(c[4]),truefeatures[:,:5])
 {% endhighlight  %}
 
 Next we'll add a hundred columns of junk, unrelated to the target
 
-{% highlight python %}
+{% highlight numpy %}
 train=np.append(truefeatures,np.random.rand(1000,100),axis=1)
 {% endhighlight  %}
 
 We'll make a Random Forest that has 500 trees with 2 levels each and we'll only look at 3 features at a time. Quick intro to Random Forests: it's a collection of decision trees, each trained on a randomly drawn subset of the data and features.
 
-{% highlight python %}
+{% highlight numpy %}
 forest=sklearn.ensemble.RandomForestRegressor(n_estimators=500,max_depth=2,max_features=3)
 %time forest=forest.fit(train,target)
 {% endhighlight  %}
@@ -43,7 +43,7 @@ Wall time: 460 ms
 
 Very fast even on my dated i5-3230M. Now we can use the built in feature relevance score to find the ones to keep. The 5 highest ones are as expected, the true features. And they're several standard deviations above the mean score - one's even up to particle physics standards!
 
-{% highlight python %}
+{% highlight numpy %}
 np.argsort(forest.feature_importances_)[-5:]
 {% endhighlight %}
 
@@ -52,7 +52,7 @@ array([4, 3, 0, 1, 2])
 {% endhighlight %}
 
 
-{% highlight python %}
+{% highlight numpy %}
 (forest.feature_importances_[:5]-np.mean(forest.feature_importances_))/np.std(forest.feature_importances_)
 {% endhighlight %}
 ``array([ 3.52628814,  2.93327098,  3.89061919,  5.21814166,  3.33544238])``
@@ -77,7 +77,7 @@ histrf/100
 
 The less trees you have, the less likely they are to be sampled enough to be found as good features. 2-3X the number of total features will get you the right ones most of the time, and 4-5X will pretty much guarantee they're the top ones. How does PCA do in this problem? Since all our features are completely independent, we know the principal components will consist of the junk and true features with equal probability. But just for fun, let's look at how often the true features are among the largest five factors in the first five principal components.
 
-{% highlight python %}
+{% highlight numpy %}
 pca=sklearn.decomposition.PCA(n_components=5)
 histpca=np.zeros(5)
 for i in range(100):
@@ -95,20 +95,20 @@ histpca/100
 
 Quite dismal. But this isn't really fair, since we would know not to use PCA in the case : the variance explained by the top principal components is only a tiny fraction of the total variance in the data.
 
-{% highlight python %}
+{% highlight numpy %}
 pca.explained_variance_ratio_[:5]
 {% endhighlight %}
 ``array([ 0.01665517,  0.01635231,  0.01580367,  0.01550839,  0.01541421])``
 
 How much does removing the junk features help with the final training algorithm? To make it easier to score the performance (so we can use area under ROC) we'll convert this into a classification problem. The mean value of the target function is f(ci=0.5)≈−0.344935, so we'll use this as our decision boundary and get an even distribution of 1's and 0's in the target column.
 
-{% highlight python %}
+{% highlight numpy %}
 target=map(lambda c:int(((c[0]+c[1])*np.sin(c[2])-c[3]*np.exp(c[4]))>-0.344935),truefeatures[:,:5])
 {% endhighlight %}
 
 We'll use a fully connected feed-forward neural network with 2 hidden layers to model this. The code for the network is written in Theano, and is adapted from the MLP example from deeplearning.net. We'll use twice as many hidden units as inputs, set aside 10% of the data as a validation set which will be used for early stopping, and use an L2 norm for regularization.
 
-{% highlight python %}
+{% highlight numpy %}
 import trainmlp
 model=trainmlp.test_mlp(train,target,0.9,2,n_epochs=1000,learning_rate=.1,n_hidden=[210,210],L2_reg=0.0005,L1_reg=0)
 ... building the model
@@ -119,7 +119,7 @@ Optimization complete. Best validation score of 3.750000 % obtained at iteration
 AUC is 0.992181
 The code for file trainmlp.py ran for 0.58m
 
-{% highlight python %}
+{% highlight numpy %}
 model=trainmlp.test_mlp(train[:,:5],target,0.9,2,n_epochs=1000,learning_rate=.1,n_hidden=[10,10],L2_reg=0.0005,L1_reg=0)
 {% endhighlight %}
 
