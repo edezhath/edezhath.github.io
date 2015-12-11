@@ -15,7 +15,9 @@ truefeatures=np.random.rand(1000,5)
 {% endhighlight %}
 
 The regression target is generated as the following function of these random variables c0...c4:
-$$f(c_0,c_1,c_2,c_3,c_4)=(c_0+c_1)sin(c_2)-c_3 e^{ c_4}$$
+$$
+f(c_0,c_1,c_2,c_3,c_4)=(c_0+c_1)sin(c_2)-c_3 e^{ c_4}
+$$
 
 {% highlight python %}
 target=map(lambda c:(c[0]+c[1])*np.sin(c[2])-c[3]*np.exp(c[4]),truefeatures[:,:5])
