@@ -47,7 +47,7 @@ Very fast even on my dated i5-3230M. Now we can use the built in feature relevan
 np.argsort(forest.feature_importances_)[-5:]
 {% endhighlight %}
 
-{% highlight python bold %}
+{% highlight numpy %}
 array([4, 3, 0, 1, 2])
 {% endhighlight %}
 
@@ -59,7 +59,7 @@ array([4, 3, 0, 1, 2])
 
 Is this reliable? Let's do a hundred runs with just 300 trees and count what fraction of times the true features are in the top 5.
 
-{% highlight python %}
+{% highlight numpy %}
 histrf=np.zeros(5)
 forest=sklearn.ensemble.RandomForestRegressor(n_estimators=300,max_depth=2,max_features=3)
 for i in range(100):
