@@ -1,6 +1,7 @@
 ---
-published: false
+published: true
 ---
+
 
 ## Feature selection with shallow Random Forests
 
